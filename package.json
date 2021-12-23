@@ -1,0 +1,15 @@
+{
+  "name": "kira-bot",
+  "version": "1.0.0",
+  "description": "Kayno0o's Discord bot",
+  "main": "main.ts",
+  "repository": "git@github.com:Kayno0o/KiraBot.git",
+  "author": "Kayno0o",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "discord.js": "^13.3.1",
+    "dotenv": "^10.0.0",
+    "ts-node": "^10.4.0"
+  }
+}
