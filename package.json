@@ -8,6 +8,7 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
+    "child_process": "^1.0.2",
     "discord.js": "^13.3.1",
     "dotenv": "^10.0.0",
     "ts-node": "^10.4.0",
