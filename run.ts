@@ -6,7 +6,7 @@ import { Client, Intents } from "discord.js";
 dotenv.config();
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
-const prefix = process.env.PREFIX + "" + process.env.PREFIX;
+const prefix = process.env.PREFIX;
 const uID = process.env.OWNER_ID;
 
 client.on('ready', () => {
@@ -15,7 +15,6 @@ client.on('ready', () => {
 
 client.on('messageCreate', async (message) => {
     if (message.author.bot) return;
-    if (message.author.id !== uID) return;
 
     const msg = message.content.toLowerCase();
     let args = msg.split(' ');
@@ -28,17 +27,19 @@ client.on('messageCreate', async (message) => {
 
             console.log(`${message.author.username} ran command: ${cmd}`);
 
-            switch (cmd) {
-                case 'reload':
-                    exec("./scripts/reload.sh", (err, stdout, stderr) => {});
-                    console.log(`\n ---- Reloaded! ---- \n`);
-                    message.delete();
-                    break;
-                case 'stop':
-                    console.log(`\n ---- Stopped! ---- \n`);
-                    message.delete();
-                    process.exit(0);
-                    break;
+            if (message.author.id == uID && command.startsWith(prefix)) {
+                switch (cmd) {
+                    case 'reload':
+                        exec("./scripts/reload.sh", (err, stdout, stderr) => {});
+                        console.log(`\n ---- Reloaded! ---- \n`);
+                        message.delete();
+                        break;
+                    case 'stop':
+                        console.log(`\n ---- Stopped! ---- \n`);
+                        message.delete();
+                        process.exit(0);
+                        break;
+                }
             }
         }
     }
