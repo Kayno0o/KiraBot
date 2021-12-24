@@ -30,6 +30,8 @@ client.on('messageCreate', async (message ) => {
                 if(cmd === 'reload' || cmd === 'stop') {
                     process.exit(0);
                 }
+            } else {
+                
             }
         }
     }

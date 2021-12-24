@@ -1,3 +1,3 @@
 #!/bin/bash
 
-yarn ts-node ./app/main.ts
+yarn ts-node ./app/main.ts &

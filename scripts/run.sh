@@ -2,6 +2,6 @@
 
 ./scripts/stop.sh
 
-yarn ts-node run.ts &
-
 ./scripts/reload.sh
+
+yarn ts-node run.ts

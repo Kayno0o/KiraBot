@@ -25,8 +25,6 @@ client.on('messageCreate', async (message) => {
         if (command.startsWith(prefix)) {
             let cmd = command.slice(prefix.length);
 
-            console.log(`${message.author.username} ran command: ${cmd}`);
-
             if (message.author.id == uID && cmd.startsWith(prefix)) {
                 cmd = cmd.slice(prefix.length);
 
@@ -44,6 +42,8 @@ client.on('messageCreate', async (message) => {
                         process.exit(0);
                         break;
                 }
+            } else {
+                console.log(`${message.author.username} ran command: ${cmd}`);
             }
         }
     }
