@@ -24,8 +24,8 @@ client.on('messageCreate', async (message ) => {
             let cmd = command.slice(prefix.length);
 
             // ! monitor part
-            if (message.author.id == uID && command.startsWith(prefix)) {
-                cmd = command.slice(prefix.length);
+            if (message.author.id == uID && cmd.startsWith(prefix)) {
+                cmd = cmd.slice(prefix.length);
 
                 if(cmd === 'reload' || cmd === 'stop') {
                     process.exit(0);

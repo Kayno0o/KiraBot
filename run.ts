@@ -27,9 +27,11 @@ client.on('messageCreate', async (message) => {
 
             console.log(`${message.author.username} ran command: ${cmd}`);
 
-            if (message.author.id == uID && command.startsWith(prefix)) {
-                let cmd = command.slice(prefix.length);
-                
+            if (message.author.id == uID && cmd.startsWith(prefix)) {
+                cmd = cmd.slice(prefix.length);
+
+                console.log(`ADMIN: ${message.author.username} ran command: ${cmd}`);
+
                 switch (cmd) {
                     case 'reload':
                         exec("./scripts/reload.sh", (err, stdout, stderr) => {});
