@@ -12,7 +12,11 @@
     "discord.js": "^13.3.1",
     "dotenv": "^10.0.0",
     "mariadb": "^2.5.5",
+    "nodemon": "^2.0.15",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.4"
+  },
+  "scripts": {
+    "watch": "yarn nodemon ./app/main.ts"
   }
 }
