@@ -9,12 +9,14 @@ dotenv.config();
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const prefix = process.env.PREFIX;
 
+const commandsPath = path.join(__dirname, 'Commands');
 let commands: Map<string, Command> = new Map();
 
 client.on('ready', () => {
     console.log(`\n   Logged in as ${client.user?.tag}`);
 
-    reloadCommands(path.join(__dirname, 'Commands'));
+    reloadCommands(commandsPath);
+    watchCommands(commandsPath);
 })
 
 client.on('messageCreate', async (message) => {
@@ -30,26 +32,36 @@ client.on('messageCreate', async (message) => {
             let cmd = command.slice(prefix.length);
 
             if (commands.has(cmd)) {
-                try {
-                    commands.get(cmd)?.execute(message, args, client);
-                } catch (error) {
-                    console.error(error);
-                }
+                commands.get(cmd)?.execute(message, args, client);
             }
         }
     }
 })
 
-function reloadCommands(filePath: string) {
-    commands = new Map();
-    console.log(`\n   Reloading commands\n`);
-    loadCommands(filePath);
-    console.log(`\n   Reloaded ${commands.size} commands!`);
+function watchCommands(filePath: string) {
+    fs.readdirSync(filePath).forEach(file => {
+        if (file.endsWith('.ts')) {
+            fs.watch(path.join(filePath, file), (event, filename) => {
+                if (filename) {
+                    loadCommand(path.join(filePath, file), true);
+                }
+            });
+        }
+
+        if (fs.lstatSync(`${filePath}/${file}`).isDirectory()) {
+            watchCommands(`${filePath}/${file}`);
+        }
+    });
 }
 
-function loadCommands(filePath: string) {
-    let i = 0;
+function reloadCommands(filePath: string) {
+    console.log(`\n   Loading commands`);
+    commands = new Map();
+    let loaded = loadCommands(filePath);
+    console.log(`   Loaded ${loaded} commands and ${commands.size - loaded} aliases!\n`);
+}
 
+function loadCommands(filePath: string, i = 0) {
     fs.readdirSync(filePath).forEach(file => {
         if (file.endsWith('.js') || file.endsWith('.ts')) {
             loadCommand(`${filePath}/${file}`);
@@ -57,17 +69,22 @@ function loadCommands(filePath: string) {
         }
 
         if (fs.lstatSync(`${filePath}/${file}`).isDirectory()) {
-            loadCommands(`${filePath}/${file}`);
+            i += loadCommands(`${filePath}/${file}`);
         }
     });
+    return i;
 }
 
-function loadCommand(filePath: string) {
+function loadCommand(filePath: string, reload = false) {
     delete require.cache[require.resolve(filePath)];
     const { command } = require(filePath);
     const cmd: Command = new command();
 
-    console.log(`   Loaded ${cmd.name}!`);
+    if (!reload) {
+        console.log(`   Loaded ${cmd.name}!`);
+    } else {
+        console.log(`   Reloaded ${cmd.name}!`);
+    }
 
     commands.set(cmd.name, cmd);
     cmd.aliases.forEach(alias => {
