@@ -1,5 +1,7 @@
 import dotenv from "dotenv";
 import { Client, Intents } from "discord.js";
+import fs from "fs";
+import { Command } from "./Interfaces/Command";
 
 dotenv.config();
 
@@ -22,17 +24,6 @@ client.on('messageCreate', async (message ) => {
 
         if (command.startsWith(prefix)) {
             let cmd = command.slice(prefix.length);
-
-            // ! monitor part
-            if (message.author.id == uID && cmd.startsWith(prefix)) {
-                cmd = cmd.slice(prefix.length);
-
-                if(cmd === 'reload' || cmd === 'stop') {
-                    process.exit(0);
-                }
-            } else {
-                
-            }
         }
     }
 })
