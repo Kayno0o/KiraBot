@@ -41,3 +41,40 @@ WEATHER_API_KEY=
 OWNER_ID=
 PREFIX=;
 ```
+
+## Setup (yarn)
+
+```
+yarn install
+```
+
+## Run the bot (prod)
+
+```
+npm run start
+```
+
+## Run the bot (dev)
+
+```
+npm run dev
+```
+
+## Dependencies
+
+child_process:
+    - https://www.npmjs.com/package/child_process
+discord.js:
+    - https://www.npmjs.com/package/discord.js
+dotenv:
+    - https://www.npmjs.com/package/dotenv
+mariadb:
+    - https://www.npmjs.com/package/mariadb
+nodemon:
+    - https://www.npmjs.com/package/nodemon
+ts-node:
+    - https://www.npmjs.com/package/ts-node
+typescript:
+    - https://www.npmjs.com/package/typescript
+node-fetch:
+    - https://www.npmjs.com/package/node-fetch

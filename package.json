@@ -17,6 +17,7 @@
     "typescript": "^4.5.4"
   },
   "scripts": {
-    "watch": "yarn nodemon --watch ./app/main.ts ./app/main.ts"
+    "start": "yarn ts-node main.ts",
+    "dev": "yarn nodemon --watch ./app/main.ts ./app/main.ts"
   }
 }
