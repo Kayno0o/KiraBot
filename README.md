@@ -17,21 +17,28 @@ Feel free to send me suggestions on my [Discord](https://discord.gg/v3gWmCrvNf)
 - [Setup](#setup)
   - [Prerequisite](#prerequisite)
   - [.env file](#env-file)
+  - [Setup (yarn)](#setup-yarn)
+  - [Run the bot (prod)](#run-the-bot-prod)
+  - [Run the bot (dev)](#run-the-bot-dev)
+  - [Dependencies](#dependencies)
 
 # Setup
 
 ## Prerequisite
 
 - Debian
-    ```
-    sudo apt install nodejs yarn
-    ```
-- Arch (yay)
-    ```
-    yay -S nodejs yarn
-    ```
 
-I think that's all, or at least for those 2 linux distro
+```
+    sudo apt install nodejs yarn
+```
+
+- Arch (yay)
+
+```
+    yay -S nodejs yarn
+```
+
+- Windows: Good luck with [that](https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable).
 
 ## .env file
 
@@ -39,7 +46,7 @@ I think that's all, or at least for those 2 linux distro
 BOT_TOKEN=
 WEATHER_API_KEY=
 OWNER_ID=
-PREFIX=;
+PREFIX=!
 ```
 
 ## Setup (yarn)
